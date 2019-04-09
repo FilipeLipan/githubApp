@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.apollographql.android'
 
 android {
     compileSdkVersion 28
@@ -15,16 +14,15 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField "String", "HOST", '"https://api.github.com/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            buildConfigField "String", "HOST", '"https://api.github.com/"'
+        }
     }
 }
-
-//apollo {
-//    schemaFilePath = "/src/main/graphql/com.filipelipan.githubapp/schema.json"
-//    outputPackageName = "com.filipelipan.githubapp.graphql.com.filipelipan.githubapp"
-//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,12 +61,6 @@ dependencies {
     implementation "com.github.diefferson:CoroutinesCache:0.2.0"
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    implementation "com.apollographql.apollo:apollo-runtime:$apolloReleaseVersion"
-    implementation "com.apollographql.apollo:apollo-android-support:$apolloReleaseVersion"
-    implementation "com.apollographql.apollo:apollo-rx2-support:$apolloReleaseVersion"
 
-    implementation "com.apollographql.apollo:apollo-http-cache:1.0.0-alpha5"
-
-    implementation 'com.github.ghostbuster91:apollo-coroutines-adapter:master-SNAPSHOT'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

@@ -1,19 +1,22 @@
 package com.filipelipan.githubapp.data.repository.repository
 
 import android.content.Context
-import com.apollographql.apollo.ApolloClient
+import com.filipelipan.githubapp.data.api.RestApi
 import com.filipelipan.githubapp.data.entity.GithubRepositoryBO
 import com.filipelipan.githubapp.data.mapper.toGithubRepositoryBO
+import io.coroutines.cache.core.CachePolicy
 import io.coroutines.cache.core.CoroutinesCache
+import java.util.concurrent.TimeUnit
 
 
-class GithubRepoRepository(private val apolloClient: ApolloClient, context: Context): CoroutinesCache(context){
+class GithubRepoRepository(private val restApi: RestApi, context: Context){
 
-    suspend fun searchRepos(ids:String):List<GithubRepositoryBO>{
+    val PAGE_COUNT = "20"
 
+    suspend fun searchRepos(query: String,pageNumber:String): List<GithubRepositoryBO> {
 
-
-        //TODO return list
-        return ArrayList<String>().toGithubRepositoryBO()
+        return restApi.loadRepositories(query,PAGE_COUNT,pageNumber)
+            .await()
+            .items.toGithubRepositoryBO()
     }
 }

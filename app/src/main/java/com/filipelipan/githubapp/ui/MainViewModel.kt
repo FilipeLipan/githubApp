@@ -6,22 +6,22 @@ import com.filipelipan.githubapp.data.repository.repository.GithubRepoRepository
 import com.filipelipan.githubapp.ui.base.BaseViewModel
 import com.filipelipan.githubapp.utils.safeAsync
 
-class MainViewModel(val weatherRepository: GithubRepoRepository) : BaseViewModel() {
+class MainViewModel(val githubRepoRepository: GithubRepoRepository) : BaseViewModel() {
 
-    val weatherLiveData: MutableLiveData<List<GithubRepositoryBO>> = MutableLiveData()
+    val githubRepositoriesLiveData: MutableLiveData<List<GithubRepositoryBO>> = MutableLiveData()
 
     init {
-        loadWeather("524901,703448,2643743")
+        loadRepositories("a", "1")
     }
 
-    fun loadWeather(query :String){
+    fun loadRepositories(query :String, pageCount :String){
 
         showLoading()
         safeAsync(
-            action = { weatherRepository.searchRepos(query) },
+            action = { githubRepoRepository.searchRepos(query, pageCount) },
             onSuccess = {result ->
                 dismissLoading()
-              weatherLiveData.value = result
+                githubRepositoriesLiveData.value = result
             },
             onError = {error ->
                 dismissLoading()

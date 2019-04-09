@@ -1,4 +1,4 @@
-package com.example.fejn.windreport.app
+package com.filipelipan.githubapp.app
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin

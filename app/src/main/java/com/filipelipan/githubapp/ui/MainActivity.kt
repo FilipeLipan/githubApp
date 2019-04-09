@@ -14,24 +14,24 @@ class MainActivity : BaseActivity() {
     override val activityLayout: Int
         get() = R.layout.activity_main
 
-//    lateinit var weatherAdapter: WeatherAdapter
+    lateinit var repositoriesAdapter: GitHubReposAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initAdapter()
-//        observeViewModel()
+        observeViewModel()
     }
 
     fun initAdapter(){
         recyclerview.layoutManager = LinearLayoutManager(this)
-//        weatherAdapter = WeatherAdapter(arrayListOf());
-//        recyclerview.adapter = weatherAdapter
+        repositoriesAdapter = GitHubReposAdapter(arrayListOf());
+        recyclerview.adapter = repositoriesAdapter
     }
 
-//    fun observeViewModel(){
-//        viewModel.weatherLiveData.observe(this@MainActivity, Observer { weather ->
-//            weatherAdapter.setNewData(weather)
-//        })
-//    }
+    fun observeViewModel(){
+        viewModel.githubRepositoriesLiveData.observe(this@MainActivity, Observer { weather ->
+            repositoriesAdapter.setNewData(weather)
+        })
+    }
 }
