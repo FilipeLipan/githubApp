@@ -6,7 +6,9 @@ import com.filipelipan.githubapp.data.entity.GithubRepositoryBO
 
 fun List<RepositoryResponse>.toGithubRepositoryBO(): List<GithubRepositoryBO> = this.map {
 
-    GithubRepositoryBO(name = it.name ?: "",
+    GithubRepositoryBO(
+        id = it.id,
+        name = it.name ?: "",
         url = it.url ?: "",
         language = it.language ?: "",
         forks = it.forks ?: "",

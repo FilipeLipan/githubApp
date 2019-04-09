@@ -3,6 +3,8 @@ package com.filipelipan.githubapp.data.api.response
 import com.google.gson.annotations.SerializedName
 
 class RepositoryResponse(
+    @SerializedName("id")
+    val id :Long,
     @SerializedName("name")
     val name :String?,
     @SerializedName("url")

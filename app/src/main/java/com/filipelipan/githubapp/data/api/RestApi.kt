@@ -10,9 +10,9 @@ import retrofit2.http.*
 interface RestApi {
 
     @GET("search/repositories")
-    fun loadRepositories(@Query("q") query: String,
-                         @Query("per_page") pageCount:String,
-                         @Query("page")pageNumber:String): Deferred<BaseResponse<RepositoryResponse>>
+    fun searchRepos(@Query("q") query: String,
+                         @Query("per_page") pageCount:Long,
+                         @Query("page")pageNumber:Long): Deferred<BaseResponse<RepositoryResponse>>
 }
 
 

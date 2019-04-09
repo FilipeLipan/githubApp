@@ -7,7 +7,10 @@ import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import com.filipelipan.githubapp.data.api.RestClient
 import com.filipelipan.githubapp.data.repository.repository.GithubRepoRepository
+import com.filipelipan.githubapp.data.repository.repository.GithubRepositoriesPagingRepository
+import com.filipelipan.githubapp.data.repository.repository.IGithubRepositoriesPagingRepository
 import com.filipelipan.githubapp.ui.MainViewModel
+import kotlinx.coroutines.CoroutineScope
 
 
 object AppInject {
@@ -20,13 +23,15 @@ object AppInject {
 
     private val applicationModule: Module = module {
         single { RestClient().api }
+        single { CoroutinesCache(androidContext()) }
     }
 
     private val viewModelModule = module {
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel() }
     }
 
     private val repositoriesModule: Module = module {
-        single { GithubRepoRepository(get(), androidContext()) }
+        single { GithubRepoRepository(get(), get()) }
+        single { ( scope: CoroutineScope) -> GithubRepositoriesPagingRepository(scope) as IGithubRepositoriesPagingRepository<*,*> }
     }
 }

@@ -1,6 +1,7 @@
 package com.filipelipan.githubapp.data.entity
 
 class GithubRepositoryBO(
+    val id :Long,
     val name :String,
     val url:String,
     val language:String,
