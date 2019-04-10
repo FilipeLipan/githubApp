@@ -1,5 +1,7 @@
 package com.filipelipan.githubapp.data.entity
 
+import java.io.Serializable
+
 class GithubRepositoryBO(
     val id :Long,
     val name :String,
@@ -11,4 +13,4 @@ class GithubRepositoryBO(
     val description:String,
     val ownerName:String,
     val ownerDescription:String,
-    val ownerAvatarUrl:String)
+    val ownerAvatarUrl:String) : Serializable

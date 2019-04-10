@@ -16,6 +16,7 @@ class GitHubReposAdapter : BasePagedQuickAdapter<GithubRepositoryBO, BaseViewHol
             helper.setText(R.id.repoNameTextView, item.name)
                 .setText(R.id.programingLanguageTextView, item.language)
                 .setText(R.id.startCountTextView, item.stargazersCount)
+                .addOnClickListener(R.id.rootCardView)
         }
     }
 

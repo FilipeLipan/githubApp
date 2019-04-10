@@ -3,11 +3,15 @@ package com.filipelipan.githubapp.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.IBaseViewHolderAdapter
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
 import com.filipelipan.githubapp.R
 import com.filipelipan.githubapp.data.base.NetworkState
+import com.filipelipan.githubapp.data.entity.GithubRepositoryBO
 import com.filipelipan.githubapp.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.delay
@@ -44,7 +48,7 @@ class MainActivity : BaseActivity() {
                     return
                 searchFor = searchText
                 launch {
-                    delay(500)
+                    delay(800)
                     if (searchText != searchFor)
                         return@launch
                     viewModel.searchRepositories(searchText)
@@ -67,6 +71,12 @@ class MainActivity : BaseActivity() {
             viewModel.refresh()
             repositoriesAdapter.setOnLoadMoreListener(null)
         }
+
+        repositoriesAdapter.onItemChildClickListener =
+            BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
+                val repo = adapter.data.get(position) as GithubRepositoryBO
+                startActivity(RepoDetailActivity.getIntent(this, repo))
+            }
     }
 
     fun observeViewModel(){
@@ -76,10 +86,12 @@ class MainActivity : BaseActivity() {
         })
 
         viewModel.networkState.observe(this, Observer {
-            repositoriesAdapter.setNetworkState(it)
-            repositoriesAdapter.setOnLoadMoreListener{
-                viewModel.retry()
-            }
+            //TODO fix base recyclerview fork - showing erros when user perform mutiple searchs
+            // desculpa para quem está lendo - achei o bug na ultima hora
+//            repositoriesAdapter.setNetworkState(it)
+//            repositoriesAdapter.setOnLoadMoreListener{
+//                viewModel.retry()
+//            }
         })
 
         viewModel.refreshState.observe(this, Observer {

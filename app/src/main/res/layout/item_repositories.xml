@@ -14,8 +14,8 @@
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:drawable/list_selector_background"
-            android:foreground="@android:drawable/list_selector_background"
+            android:background="@drawable/bg_ripple"
+            android:foreground="@drawable/bg_ripple"
             android:clickable="true"
             android:focusable="true"
             android:elevation="5dp"
@@ -61,7 +61,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/starImageView"
                     android:src="@drawable/ic_star"
-                    android:layout_marginStart="@dimen/spacing_small"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="@dimen/spacing_extra_small"
                     app:layout_constraintTop_toBottomOf="@id/repoNameTextView"

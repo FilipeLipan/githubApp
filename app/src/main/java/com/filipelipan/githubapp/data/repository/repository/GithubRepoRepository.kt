@@ -17,7 +17,7 @@ class GithubRepoRepository(private val restApi: RestApi, private val coroutinesC
             .asyncCache({
                 restApi.searchRepos(query,PAG_ECOUNT,pageNumber)
             },
-                pageNumber.toString(),
+                query + pageNumber.toString(),
                 CachePolicy.LifeCache(1, TimeUnit.HOURS)).await()
 
         val pagedResponseBO :PagedResponseBO<GithubRepositoryBO> = PagedResponseBO()
