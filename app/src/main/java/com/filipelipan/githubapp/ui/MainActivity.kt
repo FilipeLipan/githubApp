@@ -1,6 +1,8 @@
 package com.filipelipan.githubapp.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
@@ -8,6 +10,8 @@ import com.filipelipan.githubapp.R
 import com.filipelipan.githubapp.data.base.NetworkState
 import com.filipelipan.githubapp.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
@@ -23,8 +27,32 @@ class MainActivity : BaseActivity() {
 
         initAdapter()
         observeViewModel()
+        setUpViews()
+    }
 
-        viewModel.searchRepositories("a")
+    fun setUpViews(){
+        searchEditText.addTextChangedListener(getSearchDebounce())
+    }
+
+    fun getSearchDebounce(): TextWatcher {
+        return object : TextWatcher {
+            private var searchFor = ""
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString().trim()
+                if (searchText == searchFor)
+                    return
+                searchFor = searchText
+                launch {
+                    delay(500)
+                    if (searchText != searchFor)
+                        return@launch
+                    viewModel.searchRepositories(searchText)
+                }
+            }
+            override fun afterTextChanged(s: Editable?) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+        }
     }
 
     fun initAdapter(){

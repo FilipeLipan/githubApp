@@ -44,7 +44,6 @@ class BaseDataSource<ReturnType, ParamsType>(
         networkState.postValue(NetworkState.LOADING)
 
         scope.launch{
-
             try {
                 val pagedResponse = getFunction.invoke(loadParams.key, params)
                 retry = null

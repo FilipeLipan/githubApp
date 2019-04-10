@@ -1,12 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/repoTitleTextView"/>
 
-</LinearLayout>
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/list_selector_background"
+            android:foreground="@android:drawable/list_selector_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="5dp"
+            android:layout_marginStart="@dimen/spacing_high"
+            android:layout_marginEnd="@dimen/spacing_high"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:id="@+id/rootCardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/repoNameTextView"
+                    tools:text="Reposdada dansdoasdfsdffsfsdfsdfsdfsdfsd dsfds dsfsdfdsfsdsa"
+                    android:ellipsize="end"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:maxLines="1"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/guideline"/>
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/programingLanguageTextView"
+                    tools:text="Kotlin"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toTopOf="@id/repoNameTextView"
+                    app:layout_constraintBottom_toBottomOf="@id/repoNameTextView"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/starImageView"
+                    android:src="@drawable/ic_star"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/spacing_extra_small"
+                    app:layout_constraintTop_toBottomOf="@id/repoNameTextView"
+                    android:contentDescription="@string/star_count"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/startCountTextView"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    app:layout_constraintStart_toEndOf="@id/starImageView"
+                    app:layout_constraintTop_toTopOf="@id/starImageView"
+                    app:layout_constraintBottom_toBottomOf="@id/starImageView"
+                    tools:text="61561"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/guideline"
+                    app:layout_constraintGuide_percent="0.7"
+                    android:orientation="vertical"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

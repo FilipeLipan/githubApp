@@ -2,6 +2,7 @@ package com.filipelipan.githubapp.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.filipelipan.githubapp.data.base.Listing
 import com.filipelipan.githubapp.data.entity.GithubRepositoryBO
 import com.filipelipan.githubapp.data.repository.repository.GithubRepoRepository
 import com.filipelipan.githubapp.data.repository.repository.GithubRepositoriesPagingRepository
@@ -16,15 +17,19 @@ import org.koin.standalone.inject
 class MainViewModel : BaseViewModel(), CoroutineScope, KoinComponent {
     val githubRepositoriesPagingRepository: IGithubRepositoriesPagingRepository<GithubRepositoryBO, GithubRepositoriesPagingRepository.Params> by inject{ parametersOf(this) }
 
-    private val query = MutableLiveData<String>()
+    val query = MutableLiveData<String>()
 
     private val repoResult = Transformations.map(query) {
-        githubRepositoriesPagingRepository.execute(GithubRepositoriesPagingRepository.Params(it))
+        search(query = it)
     }
 
     val repositories = Transformations.switchMap(repoResult, { it.pagedList })!!
     val networkState = Transformations.switchMap(repoResult, { it.networkState })!!
     val refreshState = Transformations.switchMap(repoResult, { it.refreshState })!!
+
+    fun search(query: String): Listing<GithubRepositoryBO> {
+        return githubRepositoriesPagingRepository.execute(GithubRepositoriesPagingRepository.Params(query))
+    }
 
     fun refresh() {
         val listing = repoResult?.value
@@ -44,5 +49,5 @@ class MainViewModel : BaseViewModel(), CoroutineScope, KoinComponent {
         listing?.retry?.invoke()
     }
 
-    fun setSearchQuery(): String? = query.value
+//    fun setSearchQuery(): String? = query.value
 }

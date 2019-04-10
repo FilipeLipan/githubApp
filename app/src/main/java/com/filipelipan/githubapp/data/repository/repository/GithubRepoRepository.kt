@@ -1,6 +1,5 @@
 package com.filipelipan.githubapp.data.repository.repository
 
-import android.content.Context
 import com.filipelipan.githubapp.data.api.RestApi
 import com.filipelipan.githubapp.data.entity.GithubRepositoryBO
 import com.filipelipan.githubapp.data.entity.PagedResponseBO
@@ -12,13 +11,11 @@ import java.util.concurrent.TimeUnit
 
 class GithubRepoRepository(private val restApi: RestApi, private val coroutinesCache: CoroutinesCache){
 
-    val PAGE_COUNT :Long = 20
-
     suspend fun searchRepos(query: String,pageNumber:Long): PagedResponseBO<GithubRepositoryBO> {
 
         val repositoriesPagedResponse = coroutinesCache
             .asyncCache({
-                restApi.searchRepos(query,PAGE_COUNT,pageNumber)
+                restApi.searchRepos(query,PAG_ECOUNT,pageNumber)
             },
                 pageNumber.toString(),
                 CachePolicy.LifeCache(1, TimeUnit.HOURS)).await()

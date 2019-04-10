@@ -8,19 +8,20 @@ import kotlinx.coroutines.CoroutineScope
 import org.koin.standalone.KoinComponent
 import org.koin.standalone.inject
 
+val PAG_ECOUNT :Long = 20
 class GithubRepositoriesPagingRepository(private val scope: CoroutineScope) :
     BasePagingRepository(scope), IGithubRepositoriesPagingRepository<GithubRepositoryBO, GithubRepositoriesPagingRepository.Params>, KoinComponent {
 
     private val githubRepoRepository: GithubRepoRepository by inject()
 
     override val config = PagedList.Config.Builder()
-        .setPageSize(20)
+        .setPageSize(PAG_ECOUNT.toInt())
         .setInitialLoadSizeHint(20 * 2)
         .setEnablePlaceholders(false)
         .build()
 
     override fun execute(params: GithubRepositoriesPagingRepository.Params): Listing<GithubRepositoryBO> {
-        //TODO fix loading end list end
+        //TODO fix last loading - make list show the load finish view when necessary
 
         return listingFactory({ page, movieRepositoryParams -> githubRepoRepository.searchRepos(params.query, page)}, params)
     }

@@ -13,7 +13,9 @@ class GitHubReposAdapter : BasePagedQuickAdapter<GithubRepositoryBO, BaseViewHol
 
     override fun convert(helper: BaseViewHolder, item: GithubRepositoryBO?) {
         item?.let {
-            helper.setText(R.id.repoTitleTextView, item.name);
+            helper.setText(R.id.repoNameTextView, item.name)
+                .setText(R.id.programingLanguageTextView, item.language)
+                .setText(R.id.startCountTextView, item.stargazersCount)
         }
     }
 
