@@ -2,4 +2,7 @@
     <string name="app_name">githubApp</string>
     <string name="repository_name">Repository name</string>
     <string name="star_count">Star count</string>
+    <string name="fork_count">Fork count</string>
+    <string name="watchers_count">Watchers Count</string>
+    <string name="return_button">Return button</string>
 </resources>

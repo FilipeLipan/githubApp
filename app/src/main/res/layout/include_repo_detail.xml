@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:paddingTop="6dp"
+                                                   android:paddingBottom="6dp">
+
+    <ImageView
+            android:id="@+id/starImageView"
+            android:layout_width="@dimen/repo_detail_icon_size"
+            android:layout_height="@dimen/repo_detail_icon_size"
+            android:src="@drawable/ic_star"
+            app:layout_constraintEnd_toStartOf="@+id/forkImageView"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/star_count"/>
+
+    <ImageView
+            android:id="@+id/forkImageView"
+            android:layout_width="@dimen/repo_detail_icon_size"
+            android:layout_height="@dimen/repo_detail_icon_size"
+            android:src="@drawable/ic_fork"
+            app:layout_constraintEnd_toStartOf="@+id/watchersImageView"
+            app:layout_constraintStart_toEndOf="@+id/starImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/fork_count"/>
+
+    <ImageView
+            android:id="@+id/watchersImageView"
+            android:layout_width="@dimen/repo_detail_icon_size"
+            android:layout_height="@dimen/repo_detail_icon_size"
+            android:src="@drawable/ic_eye"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/forkImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/watchers_count"/>
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/starCountTextView"
+            style="@style/RepoDetailSubtitle"
+            app:layout_constraintEnd_toEndOf="@id/starImageView"
+            app:layout_constraintStart_toStartOf="@id/starImageView"
+            app:layout_constraintTop_toBottomOf="@id/starImageView"
+            tools:text="98"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forkCountTextView"
+            style="@style/RepoDetailSubtitle"
+            app:layout_constraintEnd_toEndOf="@id/forkImageView"
+            app:layout_constraintStart_toStartOf="@id/forkImageView"
+            app:layout_constraintTop_toBottomOf="@id/forkImageView"
+            tools:text="99"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/watchersCountTextView"
+            style="@style/RepoDetailSubtitle"
+            app:layout_constraintEnd_toEndOf="@id/watchersImageView"
+            app:layout_constraintStart_toStartOf="@id/watchersImageView"
+            app:layout_constraintTop_toBottomOf="@id/watchersImageView"
+            tools:text="100"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

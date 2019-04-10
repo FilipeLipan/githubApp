@@ -3,4 +3,9 @@
     <dimen name="spacing_high">16dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_extra_small">4dp</dimen>
+
+
+    <dimen name="repo_detail_icon_size">28dp</dimen>
+    <dimen name="repo_wallpaper_height">230dp</dimen>
+    <dimen name="repo_poster_width">85dp</dimen>
 </resources>

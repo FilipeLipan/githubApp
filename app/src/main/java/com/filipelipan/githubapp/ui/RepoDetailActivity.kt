@@ -3,18 +3,12 @@ package com.filipelipan.githubapp.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView
+import com.bumptech.glide.Glide
 import com.filipelipan.githubapp.R
-import com.filipelipan.githubapp.data.base.NetworkState
 import com.filipelipan.githubapp.data.entity.GithubRepositoryBO
 import com.filipelipan.githubapp.ui.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.activity_repo_detail.*
+import kotlinx.android.synthetic.main.include_repo_detail.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepoDetailActivity : BaseActivity() {
@@ -41,7 +35,18 @@ class RepoDetailActivity : BaseActivity() {
 
         githubRepositoryBO = intent?.getSerializableExtra(GITHUB_REPO_KEY) as GithubRepositoryBO
 
+        username.text = githubRepositoryBO.ownerName
+        description.text = githubRepositoryBO.ownerDescription
+        repoTitle.text = githubRepositoryBO.name
+        repoDescription.text = githubRepositoryBO.description
+        include_repo_detail.forkCountTextView.text = githubRepositoryBO.forks
+        include_repo_detail.starCountTextView.text = githubRepositoryBO.stargazersCount
+        include_repo_detail.watchersCountTextView.text = githubRepositoryBO.watchersCount
 
+        Glide.with(this)
+            .load(githubRepositoryBO.ownerAvatarUrl)
+            .into(ownerAvatar)
 
+        blackBackButton.setOnClickListener { onBackPressed() }
     }
 }
